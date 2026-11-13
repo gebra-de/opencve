@@ -18,6 +18,7 @@ docker/.env
 celerybeat-schedule.db
 
 # Editors
+*.code-workspace
 .vscode/
 .idea/
 

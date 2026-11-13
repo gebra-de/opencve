@@ -270,7 +270,19 @@ AUDITLOG_INCLUDE_TRACKING_MODELS = (
 )
 
 # Email backend
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = env.str(
+    "EMAIL_BACKEND",
+    default="django.core.mail.backends.console.EmailBackend",
+)
+
+EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
+EMAIL_PORT = env.int("EMAIL_PORT", default=25)
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=False)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+DEFAULT_FROM_EMAIL = env.str("DEFAULT_FROM_EMAIL", default="webmaster@localhost")
+SERVER_EMAIL = env.str("SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 
 # Internal IPs
 INTERNAL_IPS = ["127.0.0.1"]
@@ -358,7 +370,9 @@ ENABLE_ONBOARDING = True
 ENABLE_REGISTER = True
 
 # Maximum number of fields to allow in a CVE Advanced Search query
-CVES_ADVANCED_SEARCH_MAX_FIELDS = 5
+CVES_ADVANCED_SEARCH_MAX_FIELDS = env.int(
+    "CVES_ADVANCED_SEARCH_MAX_FIELDS", default=5
+)
 
 # Seconds for webhook/Slack "Try notification" HTTP requests
 NOTIFICATION_TRY_TIMEOUT = 30
