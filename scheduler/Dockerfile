@@ -34,6 +34,7 @@ ENV OPENCVE_VERSION=${OPENCVE_VERSION}
 
 COPY --from=builder --chown=airflow:root /app/opencve/scheduler/dags/ /opt/airflow/dags/
 COPY --from=builder --chown=airflow:root /app/opencve/scheduler/requirements.txt /requirements.txt
+RUN printf '\ncelery<5.7\nkombu<5.7\n' >> /requirements.txt
 
 USER airflow
 
